@@ -307,46 +307,4 @@ float4 sample_uniform_rng_4d(inout random_sampler_state r)
 #endif
 }
 
-static const float M_PI = 3.14159265;
-static const float M_2PI = 6.28318531;  // 2pi
-static const float M_4PI = 12.56637061;  // 4pi
-static const float M_PI_2 = 1.57079632679489661923; // pi/2
-static const float M_PI_4 = 0.785398163397448309616; // pi/4
-static const float M_1_PI = 0.318309886183790671538; // 1/pi
-static const float FLT_MIN = 1.175494351e-38F;        // min normalized positive value
-static const float FLT_MAX = 3.402823466e+38F;        // max value
-static const float kMinCosTheta = 1e-6f;
-static const float kBigAccumWeight = 10000.0f;
-
-float square(float x) { return x * x; }
-float2 square(float2 x) { return x * x; }
-float3 square(float3 x) { return x * x; }
-float4 square(float4 x) { return x * x; }
-
-float2 sample_disk(float2 random)
-{
-	float angle = 2 * M_PI * random.x;
-	return float2(cos(angle), sin(angle)) * sqrt(random.y);
-}
-
-float3 sample_sphere(float2 random, out float solidAnglePdf)
-{
-	// See (6-8) in https://mathworld.wolfram.com/SpherePointPicking.html
-
-	random.y = random.y * 2.0 - 1.0;
-
-	float2 tangential = sample_disk(float2(random.x, 1.0 - square(random.y)));
-	float elevation = random.y;
-
-	solidAnglePdf = 0.25f / M_PI;
-
-	return float3(tangential.xy, elevation);
-}
-
-float3 sample_sphere(float2 random)
-{
-	float pdf;
-	return sample_sphere(random, pdf);
-}
-
 #endif

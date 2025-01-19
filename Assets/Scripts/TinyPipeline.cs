@@ -113,7 +113,7 @@ public class TinyPipeline : RenderPipeline
             }
             var viewProjection = projection * camera.transform.worldToLocalMatrix;
             commandBuffer.SetGlobalTexture("_depth_texture", frameData.GetDepth(), RenderTextureSubElement.Depth);
-            commandBuffer.SetGlobalVector("_camera_pixel_size", new Vector4(1.0f / camera.pixelWidth, 1.0f / camera.pixelHeight, camera.pixelWidth, camera.pixelHeight));
+            commandBuffer.SetGlobalVector("_camera_pixel_size_and_screen_size", new Vector4(1.0f / camera.pixelWidth, 1.0f / camera.pixelHeight, camera.pixelWidth, camera.pixelHeight));
             commandBuffer.SetGlobalMatrix("_view_projection_matrix", viewProjection);
             commandBuffer.SetGlobalMatrix("_projection_matrix", projection);
             commandBuffer.SetGlobalMatrix("_world_to_camera_matrix", camera.worldToCameraMatrix);
