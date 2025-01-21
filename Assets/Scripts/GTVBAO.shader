@@ -9,6 +9,8 @@ Shader "Hidden/TinyPipeline/GTVBAO"
             Cull Off
 
             HLSLPROGRAM
+            #pragma use_dxc
+            #pragma enable_d3d11_debug_symbols
             #pragma vertex vertex_entry
             #pragma fragment fragment_entry
             
@@ -92,7 +94,24 @@ Shader "Hidden/TinyPipeline/GTVBAO"
             {
                 float linearZ = get_linearized_depth(texcoord);
                 float3 posCS = -compute_view_position_perspectiveLH(linearZ, texcoord, _projection_matrix);
+                posCS.z *= -1;
                 return posCS;
+            }
+
+            float3 screen_position_from_camera_position(float3 camera_space_position)
+            {
+                float4 H0 = mul(_camera_to_screen_matrix, float4(camera_space_position, 1.0));
+                // There are a lot of divisions by w that can be turned into multiplications
+                // at some minor precision loss...and we need to interpolate these 1/w values
+                // anyway.
+                //
+                // Because the caller was required to clip to the near plane,
+                // this homogeneous division (projecting from 4D to 2D) is guaranteed
+                // to succeed.
+                float k0 = 1.0 / H0.w;
+                // Screen-space endpoints
+                float2 P0 = H0.xy * k0;
+                return float3(P0, camera_space_position.z);
             }
             
             #include "RandomSequence.hlsl"
@@ -100,14 +119,14 @@ Shader "Hidden/TinyPipeline/GTVBAO"
             
             static const uint ao_ray_direction_count = 4;
             static const float camera_near_z = 0.1;
-            static const float ray_maching_sample_count = 16;
+            static const uint ray_maching_sample_count = 16;
             static const float ray_marching_width = 128;
             static const float ray_marching_thickness = 0.5;
             
-            float ssao(random_sampler_state rng, float3 camera_space_position, float3 camera_space_normal)
+            half3 ssao(random_sampler_state rng, float3 camera_space_position, float3 camera_space_normal)
             {
                 float3 V = -normalize(camera_space_position);
-                
+                // return camera_space_normal * 0.5 + 0.5;
                 float ao = 0.0;
                 for (uint direction_index = 0; direction_index < ao_ray_direction_count; direction_index++)
                 {
@@ -120,14 +139,19 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                         float4 quaternion_to_V = quaternion_create(V);
                         float4 quaternion_from_V = quaternion_to_V * float4(float3(-1.0, -1.0, -1.0), 1.0);// conjugate
                         float3 camera_space_normal_from_V = transform_xyz_by_unit_quaternion_xy0s(camera_space_normal, quaternion_from_V);
+                        // return camera_space_normal_from_V * 0.5 + 0.5;
                         screen_space_sample_direction = sample_slice_direction(camera_space_normal_from_V, random_number.x);
+                        // return float3(screen_space_sample_direction * 0.5 + 0.5, 0.0);
                         camera_space_sample_direction = transform_xy0_by_unit_quaternion_xy0s(screen_space_sample_direction, quaternion_from_V);
-                        float3 ray_start = mul(_camera_to_screen_matrix, float4(camera_space_position, 1.0));
-                        float3 ray_end = mul(_camera_to_screen_matrix, float4(camera_space_position + camera_space_sample_direction * camera_near_z * 0.5, 1.0));
+                        // return float3(camera_space_sample_direction * 0.5 + 0.5);
+                        float3 ray_start = screen_position_from_camera_position(camera_space_position); // mul(_camera_to_screen_matrix, float4(camera_space_position, 1.0));
+                        float3 ray_end = screen_position_from_camera_position(camera_space_position + camera_space_sample_direction * camera_near_z * 0.5);// mul(_camera_to_screen_matrix, float4(camera_space_position + camera_space_sample_direction * camera_near_z * 0.5, 1.0));
                         float3 ray_direction = ray_end - ray_start;
+                        // return float3(ray_direction * 0.5 + 0.5);
                         ray_direction /= length(ray_direction.xy);
                         screen_space_sample_direction = ray_direction.xy;
                     }
+                    // return float3(screen_space_sample_direction * 0.5 + 0.5, 0.0);
 
                     // construct slice
                     float cos_N;
@@ -135,6 +159,7 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                     {
                         float3 slice_N = cross(V, camera_space_sample_direction);
                         float3 proj_N = camera_space_normal - slice_N * dot(camera_space_normal, slice_N);
+                        // return float3(camera_space_normal * 0.5 + 0.5);
                         float proj_N_squared_length = dot(proj_N, proj_N);
                         if (proj_N_squared_length == 0.0)
                         {
@@ -143,32 +168,42 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                         float proj_N_rcp_len = rsqrt(proj_N_squared_length);
                         cos_N = dot(proj_N, V) * proj_N_rcp_len;
                         float3 T = cross(slice_N, proj_N);
+                        // return float3(slice_N * 0.5 + 0.5);
                         float sgn = dot(V, T) < 0.0 ? -1.0 : 1.0;
                         ang_N = sgn * acos_approx_safe(cos_N);
                     }
-
+                    // return float3(cos_N * 0.5 + 0.5, cos_N * 0.5 + 0.5, cos_N * 0.5 + 0.5);
                     // find horizons
-                    float4 ray_start = mul(_camera_to_screen_matrix, float4(camera_space_position, 1.0));
+                    // float4 ray_start = mul(_camera_to_screen_matrix, float4(camera_space_position, 1.0));
+                    float2 ray_start = screen_position_from_camera_position(camera_space_position).xy;
                     float ang_off = ang_N * M_1_PI + 0.5;
                     uint occusion_bits = 0u;
                     for(float d = -1.0; d <= 1.0; d += 2.0)
                     {
                         float2 ray_direction = screen_space_sample_direction * d;
-                        const float step_length = pow(ray_marching_width, 1.0 / ray_maching_sample_count);
+                        // return float3(ray_direction.x * 0.5 + 0.5, ray_direction.y * 0.5 + 0.5, 0);
+                        const float step_length = pow(ray_marching_width, 1.0 / (float)ray_maching_sample_count);
                         float t = pow(step_length, random_number.z);
                         random_number.z = 1.0 - random_number.z;
-                        for (float i = 0; i < ray_maching_sample_count; i++)
+                        for (uint i = 0; i < ray_maching_sample_count; i++)
                         {
+                            // return float3(ray_start, 0.0);
+                            // return t;
                             float2 screen_space_sample_position = ray_start + ray_direction * t;
                             t += step_length;
                             if(screen_space_sample_position.x < 0.0 || screen_space_sample_position.x >= _camera_pixel_size_and_screen_size.z || screen_space_sample_position.y < 0.0 || screen_space_sample_position.y >= _camera_pixel_size_and_screen_size.w)
                             {
                                 break;
                             }
-                            float3 camera_space_sample_position = screen_position_to_camera_position(screen_space_sample_position);
-                            float3 delta_front = camera_space_sample_position - camera_space_position;
-                            float3 delta_back  = delta_front - V * ray_marching_thickness;
+                            
+                            float2 screen_space_sample_coord = screen_space_sample_position * _camera_pixel_size_and_screen_size.xy;
+                            float3 camera_space_sample_position = screen_position_to_camera_position(screen_space_sample_coord);
 
+                            float3 delta_front = camera_space_sample_position - camera_space_position;
+                            return camera_space_sample_position;
+                            return delta_front;
+                            float3 delta_back  = delta_front - V * ray_marching_thickness;
+                            // return delta_back;
                             // project samples onto unit circle and compute angles relative to V
                             float2 horizon_cos = float2(dot(normalize(delta_front), V), 
                                    dot(normalize(delta_back), V));
@@ -214,14 +249,16 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                 float3 camera_space_normal = normalize(mul(transpose((float3x3)_camera_to_world_matrix), world_normal).xyz);
                 return ssao(rng, camera_space_position, camera_space_normal);
             }
-            float fragment_entry(vertex_output input, bool is_front_face : SV_IsFrontFace) : SV_Target0
+            half4 fragment_entry(vertex_output input, bool is_front_face : SV_IsFrontFace) : SV_Target0
             {
+                input.texcoord = 1.0 - input.texcoord;
                 const uint frame_index = 0u;
                 random_sampler_state rng = init_random_sampler(input.vertex, frame_index * ao_ray_direction_count);
                 // float linear_depth = get_linearized_depth(input.texcoord);
                 float3 camera_space_position = screen_position_to_camera_position(input.texcoord);
                 float3 camera_space_normal = normalize(cross(ddy(camera_space_position.xyz), ddx(camera_space_position.xyz))) * (is_front_face ? 1.0 : -1.0);
-                return ssao(rng, camera_space_position, camera_space_normal);
+                camera_space_normal *= -1;
+                return half4(ssao(rng, camera_space_position, camera_space_normal), 1.0);
             }
             
             ENDHLSL

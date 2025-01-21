@@ -87,7 +87,7 @@ float3 transform_xyz_by_unit_quaternion_xy0s(float3 v, float4 q)
                 
     float3 r;
     r.xy = v.xy + q.yx * float2(g, -g);
-    r.z  = v.z  + 2.0 * (q.w * k - v.z * dot(q.xy, q.xy));
+    r.z  = v.z + 2.0 * (q.w * k - v.z * dot(q.xy, q.xy));
                 
     return r;
 }

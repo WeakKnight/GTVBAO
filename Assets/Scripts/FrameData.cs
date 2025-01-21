@@ -45,7 +45,7 @@ public class FrameData
         linearResult = new RenderTexture(camera.pixelWidth, camera.pixelHeight, 24, RenderTextureFormat.RGB111110Float, RenderTextureReadWrite.Linear);
         linearResult.Create();
 
-        ssaoTexture = new RenderTexture(camera.pixelWidth, camera.pixelHeight, 0, RenderTextureFormat.RFloat, RenderTextureReadWrite.Linear);
+        ssaoTexture = new RenderTexture(camera.pixelWidth, camera.pixelHeight, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear);
         ssaoTexture.enableRandomWrite = true;
         ssaoTexture.filterMode = FilterMode.Point;
         ssaoTexture.Create();

@@ -44,7 +44,8 @@ Shader "Hidden/TinyPipeline/PostProcessing"
             }
             
             Texture2D<half4> _input_texture;
-
+            Texture2D<half4> _ao_texture;
+            
             half3 linear_to_sRGB(in half3 color)
             {
                 float3 x = color * 12.92f;
@@ -73,6 +74,8 @@ Shader "Hidden/TinyPipeline/PostProcessing"
                 // return _input_texture.SampleLevel(sampler_input_texture, input.texcoord, 0);
                 // return _input_texture.SampleLevel(sampler_input_texture, input.texcoord, input_texture_mip_level);
                 half3 linColor = _input_texture.Load(uint3(input.vertex.xy, 0)).xyz;
+                half3 ao = _ao_texture.Load(uint3(input.vertex.xy, 0)).xyz;
+                return half4(ao, 1.0);
                 return half4(tonemapping(linColor), 1.0);
             }
             

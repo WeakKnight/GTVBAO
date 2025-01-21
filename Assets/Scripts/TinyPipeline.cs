@@ -106,7 +106,7 @@ public class TinyPipeline : RenderPipeline
             Matrix4x4 GetCameraToScreenMatrix(int screenWidth, int screenHeight)
             {
                 Matrix4x4 ndcToPixelMat = Matrix4x4.Translate(new Vector3(0.5f, 0.5f, 0)) *
-                                          Matrix4x4.Scale(new Vector3(-0.5f, -0.5f, 1));
+                                          Matrix4x4.Scale(new Vector3(0.5f, 0.5f, 1));
                 ndcToPixelMat = Matrix4x4.Scale(new Vector3(screenWidth, screenHeight, 1)) * ndcToPixelMat;
                 Matrix4x4 projectionToPixelMatrix = ndcToPixelMat * projection;
                 return projectionToPixelMatrix;
@@ -128,6 +128,7 @@ public class TinyPipeline : RenderPipeline
             commandBuffer.BeginSample("Post Processing");
             commandBuffer.SetRenderTarget(frameData.cameraTexture);
             commandBuffer.SetGlobalTexture("_input_texture", frameData.linearResult);
+            commandBuffer.SetGlobalTexture("_ao_texture", frameData.ssaoTexture);
             commandBuffer.DrawMesh(Utils.QuadMesh, Matrix4x4.identity, postProcessingMaterial);
             
             commandBuffer.EndSample("Post Processing");
