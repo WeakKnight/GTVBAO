@@ -128,6 +128,11 @@ float acos_approx_safe(float x)
     return acos_approx(clamp(x, -1.0, 1.0));
 }
 
+float2 acos_approx_safe(float2 v)
+{
+    return float2(acos_approx(clamp(v.x, -1.0, 1.0)), acos_approx(clamp(v.y, -1.0, 1.0)));
+}
+
 // convex/concave(based on b) step
 float curvature_bias_step(float x, float b)
 {
