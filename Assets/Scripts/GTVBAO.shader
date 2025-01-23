@@ -120,7 +120,7 @@ Shader "Hidden/TinyPipeline/GTVBAO"
             static const uint ao_ray_direction_count = 4;
             static const float camera_near_z = 0.1;
             static const uint ray_maching_sample_count = 16;
-            static const float ray_marching_width = 128;
+            static const float ray_marching_width = 256;
             static const float ray_marching_thickness = 0.5;
             
             half3 ssao(random_sampler_state rng, float3 camera_space_position, float3 camera_space_normal)
@@ -128,6 +128,7 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                 float3 V = -normalize(camera_space_position);
                 // return camera_space_normal * 0.5 + 0.5;
                 float ao = 0.0;
+                float3 visColor = 0;
                 for (uint direction_index = 0; direction_index < ao_ray_direction_count; direction_index++)
                 {
                     float4 random_number = sample_uniform_rng_4d(rng);
@@ -200,10 +201,8 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                             float3 camera_space_sample_position = screen_position_to_camera_position(screen_space_sample_coord);
 
                             float3 delta_front = camera_space_sample_position - camera_space_position;
-                            return camera_space_sample_position;
-                            return delta_front;
                             float3 delta_back  = delta_front - V * ray_marching_thickness;
-                            // return delta_back;
+  
                             // project samples onto unit circle and compute angles relative to V
                             float2 horizon_cos = float2(dot(normalize(delta_front), V), 
                                    dot(normalize(delta_back), V));
@@ -212,7 +211,7 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                             float2 horizon_01 = clamp(horizon_ang * M_1_PI + ang_off, 0.0, 1.0);
                             // sampling direction flips min/max angles
                             horizon_01 = d >= 0.0 ? horizon_01.xy : horizon_01.yx;
-
+                            
                             // map to slice relative distribution
                             horizon_01.x = slice_rel_cdf_cos(horizon_01.x, ang_N, cos_N, d > 0.0);
                             horizon_01.y = slice_rel_cdf_cos(horizon_01.y, ang_N, cos_N, d > 0.0);
@@ -241,6 +240,7 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                 }
                 ao /= float(ao_ray_direction_count);
                 return ao;
+                return ao;
             }
 
             float ssao_ext(random_sampler_state rng, float3 world_position, float3 world_normal)
@@ -254,7 +254,11 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                 input.texcoord = 1.0 - input.texcoord;
                 const uint frame_index = 0u;
                 random_sampler_state rng = init_random_sampler(input.vertex, frame_index * ao_ray_direction_count);
-                // float linear_depth = get_linearized_depth(input.texcoord);
+                float linear_depth = get_linearized_depth(input.texcoord);
+                if (linear_depth > 1000)
+                {
+                    return 0;
+                }
                 float3 camera_space_position = screen_position_to_camera_position(input.texcoord);
                 float3 camera_space_normal = normalize(cross(ddy(camera_space_position.xyz), ddx(camera_space_position.xyz))) * (is_front_face ? 1.0 : -1.0);
                 camera_space_normal *= -1;
