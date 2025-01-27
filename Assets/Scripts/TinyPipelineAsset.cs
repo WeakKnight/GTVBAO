@@ -2,7 +2,7 @@ using UnityEngine;
 using UnityEngine.Rendering;
 
 [CreateAssetMenu(menuName = "Rendering/TinyPipelineAsset")]
-public class TinyPipelineAsset : RenderPipelineAsset<TinyPipeline>
+public class TinyPipelineAsset : RenderPipelineAsset
 {
     protected override RenderPipeline CreatePipeline()
     {
