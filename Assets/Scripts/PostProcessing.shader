@@ -44,6 +44,7 @@ Shader "Hidden/TinyPipeline/PostProcessing"
             }
             
             Texture2D<half4> _input_texture;
+            SamplerState _inline_point_clamp_sampler;
             Texture2D<half4> _ao_texture;
             
             half3 linear_to_sRGB(in half3 color)
@@ -71,11 +72,7 @@ Shader "Hidden/TinyPipeline/PostProcessing"
             
             half4 fragment_entry(vertex_output input) : SV_Target0
             {
-                // return _input_texture.SampleLevel(sampler_input_texture, input.texcoord, 0);
-                // return _input_texture.SampleLevel(sampler_input_texture, input.texcoord, input_texture_mip_level);
-                half3 linColor = _input_texture.Load(uint3(input.vertex.xy, 0)).xyz;
-                half3 ao = _ao_texture.Load(uint3(input.vertex.xy, 0)).xyz;
-                return half4(ao, 1.0);
+                half3 linColor = _input_texture.SampleLevel(_inline_point_clamp_sampler, float2(input.texcoord.xy), 0.0f).xyz;
                 return half4(tonemapping(linColor), 1.0);
             }
             

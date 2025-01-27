@@ -18,6 +18,21 @@ public static class Utils
     }
     private static Mesh _QuadMesh;
     
+    public static Mesh FlippedQuadMesh
+    {
+        get
+        {
+            if (_FlippedQuadMesh)
+            {
+                return _FlippedQuadMesh;
+            }
+
+            _FlippedQuadMesh = build_draw_quad_mesh(true);
+            return _FlippedQuadMesh;
+        }
+    }
+    private static Mesh _FlippedQuadMesh;
+    
     private static Mesh build_draw_quad_mesh(bool flip)
     {
         List<Vector3> positions = new List<Vector3>();

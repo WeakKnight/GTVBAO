@@ -251,7 +251,6 @@ Shader "Hidden/TinyPipeline/GTVBAO"
             }
             half4 fragment_entry(vertex_output input, bool is_front_face : SV_IsFrontFace) : SV_Target0
             {
-                input.texcoord = 1.0 - input.texcoord;
                 const uint frame_index = 0u;
                 random_sampler_state rng = init_random_sampler(input.vertex, frame_index * ao_ray_direction_count);
                 float linear_depth = get_linearized_depth(input.texcoord);
@@ -259,10 +258,10 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                 {
                     return 0;
                 }
+                
                 float3 camera_space_position = screen_position_to_camera_position(input.texcoord);
                 float3 camera_space_normal = normalize(cross(ddy(camera_space_position.xyz), ddx(camera_space_position.xyz))) * (is_front_face ? 1.0 : -1.0);
-                camera_space_normal *= -1;
-                return half4(ssao(rng, camera_space_position, camera_space_normal), 1.0);
+                return half4(camera_space_normal, 1.0);
             }
             
             ENDHLSL

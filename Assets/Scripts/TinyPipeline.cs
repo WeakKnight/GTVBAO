@@ -76,7 +76,7 @@ public class TinyPipeline : RenderPipeline
             );
 
             {
-                commandBuffer.BeginSample("G Buffer");
+                commandBuffer.BeginSample("GBuffer");
 
                 RendererListDesc desc = new RendererListDesc(new ShaderTagId("GBuffer"), cullingResults, camera)
                 {
@@ -87,7 +87,7 @@ public class TinyPipeline : RenderPipeline
 
                 RendererList rendererList = context.CreateRendererList(desc);
                 commandBuffer.DrawRendererList(rendererList);
-                commandBuffer.EndSample("G Buffer");
+                commandBuffer.EndSample("GBuffer");
             }
 
             if (camera.clearFlags.HasFlag(CameraClearFlags.Skybox))
