@@ -9,6 +9,9 @@
 #include "../Common.hlsl"
 
 Texture2D<float> _depth_texture;
+Texture2D _normal_texture;
+
+SamplerState _inline_point_clamp_sampler;
 SamplerState _inline_linear_clamp_sampler;
 float4 _camera_pixel_size_and_screen_size;
 float4x4 _view_projection_matrix;
@@ -21,7 +24,7 @@ RWTexture2D<float4> _output_texture;
 
 float get_linearized_depth(float2 texcoord)
 {
-    float depth = _depth_texture.SampleLevel(_inline_linear_clamp_sampler, texcoord, 0).x;
+    float depth = _depth_texture.SampleLevel(_inline_point_clamp_sampler, texcoord, 0).x;
     return LinearEyeDepth(depth);
 }
 
@@ -88,7 +91,8 @@ void CSMain (uint2 id : SV_DispatchThreadID)
     
     float2 uv = (id.xy + 0.5) / _camera_pixel_size_and_screen_size.zw;
     float linear_depth = get_linearized_depth(uv) / 10.0;
+    float3 world_space_normal = _normal_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0);
     // float3 camera_space_position = screen_position_to_camera_position(input.texcoord);
     // float3 camera_space_normal = normalize(cross(ddy(camera_space_position.xyz), ddx(camera_space_position.xyz)));
-    _output_texture[id.xy] = float4(linear_depth, linear_depth, linear_depth, 0.0);
+    _output_texture[id.xy] = float4(world_space_normal * 0.5 + 0.5, 0.0);
 }

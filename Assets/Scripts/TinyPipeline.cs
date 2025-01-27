@@ -58,10 +58,10 @@ public class TinyPipeline : RenderPipeline
         
         RenderTargetBinding renderTargetBinding = new()
         {
-            colorRenderTargets = new RenderTargetIdentifier[] { frameData.linearResult.colorBuffer },
+            colorRenderTargets = new RenderTargetIdentifier[] { frameData.linearResult.colorBuffer, frameData.normalW.colorBuffer },
             depthRenderTarget = frameData.GetDepth(),
-            colorLoadActions = new RenderBufferLoadAction[] { RenderBufferLoadAction.Load },
-            colorStoreActions = new RenderBufferStoreAction[] { RenderBufferStoreAction.Store }
+            colorLoadActions = new RenderBufferLoadAction[] { RenderBufferLoadAction.Load, RenderBufferLoadAction.Load },
+            colorStoreActions = new RenderBufferStoreAction[] { RenderBufferStoreAction.Store, RenderBufferStoreAction.Store }
         };
 
         // Linear Color
@@ -70,7 +70,7 @@ public class TinyPipeline : RenderPipeline
             CameraClearFlags clearFlags = camera.clearFlags;
             commandBuffer.ClearRenderTarget(
                 (clearFlags & CameraClearFlags.Depth) != 0,
-                (clearFlags & CameraClearFlags.Color) != 0,
+                true,
                 camera.backgroundColor
             );
 
@@ -111,6 +111,8 @@ public class TinyPipeline : RenderPipeline
             }
             var viewProjection = projection * camera.transform.worldToLocalMatrix;
             commandBuffer.SetGlobalTexture("_depth_texture", frameData.GetDepth(), RenderTextureSubElement.Depth);
+            commandBuffer.SetGlobalTexture("_normal_texture", frameData.normalW);
+            
             commandBuffer.SetGlobalVector("_camera_pixel_size_and_screen_size", new Vector4(1.0f / camera.pixelWidth, 1.0f / camera.pixelHeight, camera.pixelWidth, camera.pixelHeight));
             commandBuffer.SetGlobalMatrix("_view_projection_matrix", viewProjection);
             commandBuffer.SetGlobalMatrix("_projection_matrix", projection);

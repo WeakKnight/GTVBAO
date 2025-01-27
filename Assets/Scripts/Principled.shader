@@ -45,6 +45,7 @@ Shader "TinyPipeline/Principled"
             {
                 float2 uv0 : TEXCOORD0;
                 float4 vertex : SV_POSITION;
+                float3 normal : NORMAL;
             };
             
 
@@ -53,13 +54,24 @@ Shader "TinyPipeline/Principled"
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.position);
                 o.uv0 = TRANSFORM_TEX(v.uv0, _BaseColorTex);
+                o.normal = v.normal;
                 return o;
             }
 
-            half4 frag (v2f i) : SV_Target
+            struct GBufferOutput
             {
-                half4 col = _BaseColor * tex2D(_BaseColorTex, i.uv0);
-                return col;
+                float4 baseColor : SV_Target0;
+                float4 normalW : SV_Target1;
+            };
+            
+            GBufferOutput frag (v2f i)
+            {
+                float3 worldNormal = UnityObjectToWorldNormal(i.normal);
+                
+                GBufferOutput output;
+                output.baseColor = _BaseColor * tex2D(_BaseColorTex, i.uv0);
+                output.normalW = float4(worldNormal.xyz, 1.0f);
+                return output;
             }
             
             ENDHLSL

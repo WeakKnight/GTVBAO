@@ -7,6 +7,7 @@ public class FrameData
 {
     public RenderTargetIdentifier cameraTexture;
     public RenderTexture linearResult;
+    public RenderTexture normalW;
     public RenderTexture ssaoTexture;
     public int width = -1;
     public int height = -1;
@@ -16,7 +17,7 @@ public class FrameData
         return linearResult.depthBuffer;
     }
     
-    public void Dispose()
+    private void Dispose()
     {
         if (linearResult)
         {
@@ -24,15 +25,21 @@ public class FrameData
         }
         linearResult = null;
         
+        if (normalW)
+        {
+            normalW.Release();
+        }
+        normalW = null;
+        
         if (ssaoTexture)
         {
             ssaoTexture.Release();
         }
         ssaoTexture = null;
     }
-    public void Resize(Camera camera)
+    private void Resize(Camera camera)
     {
-        if (width == camera.pixelWidth && height == camera.pixelHeight && linearResult != null && ssaoTexture != null)
+        if (width == camera.pixelWidth && height == camera.pixelHeight && linearResult != null && normalW != null && ssaoTexture != null)
         {
             return;
         }
@@ -45,6 +52,9 @@ public class FrameData
         linearResult = new RenderTexture(camera.pixelWidth, camera.pixelHeight, 24, RenderTextureFormat.RGB111110Float, RenderTextureReadWrite.Linear);
         linearResult.Create();
 
+        normalW = new RenderTexture(camera.pixelWidth, camera.pixelHeight, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear);
+        normalW.Create();
+        
         ssaoTexture = new RenderTexture(camera.pixelWidth, camera.pixelHeight, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear);
         ssaoTexture.enableRandomWrite = true;
         ssaoTexture.filterMode = FilterMode.Point;
