@@ -42,6 +42,9 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                 #else
                 o.vertex.z = 1;
                 #endif
+
+                o.texcoord = 1.0 - o.texcoord;
+                
                 return o;
             }
             
@@ -94,7 +97,6 @@ Shader "Hidden/TinyPipeline/GTVBAO"
             {
                 float linearZ = get_linearized_depth(texcoord);
                 float3 posCS = -compute_view_position_perspectiveLH(linearZ, texcoord, _projection_matrix);
-                posCS.z *= -1;
                 return posCS;
             }
 
@@ -240,7 +242,6 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                 }
                 ao /= float(ao_ray_direction_count);
                 return ao;
-                return ao;
             }
 
             float ssao_ext(random_sampler_state rng, float3 world_position, float3 world_normal)
@@ -260,8 +261,8 @@ Shader "Hidden/TinyPipeline/GTVBAO"
                 }
                 
                 float3 camera_space_position = screen_position_to_camera_position(input.texcoord);
-                float3 camera_space_normal = normalize(cross(ddy(camera_space_position.xyz), ddx(camera_space_position.xyz))) * (is_front_face ? 1.0 : -1.0);
-                return half4(camera_space_normal, 1.0);
+                float3 camera_space_normal = normalize(cross(ddy(camera_space_position.xyz), ddx(camera_space_position.xyz)));
+                return half4(camera_space_normal * 0.5 + 0.5, 1.0);
             }
             
             ENDHLSL

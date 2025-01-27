@@ -73,6 +73,8 @@ Shader "Hidden/TinyPipeline/PostProcessing"
             half4 fragment_entry(vertex_output input) : SV_Target0
             {
                 half3 linColor = _input_texture.SampleLevel(_inline_point_clamp_sampler, float2(input.texcoord.xy), 0.0f).xyz;
+                half4 ao = _ao_texture.SampleLevel(_inline_point_clamp_sampler, float2(input.texcoord.xy), 0.0f);
+                return ao;
                 return half4(tonemapping(linColor), 1.0);
             }
             

@@ -6,16 +6,15 @@ public class TinyPipeline : RenderPipeline
 {
     FrameData.Dict frameDataDict;
     private Material postProcessingMaterial;
-    private Material ssaoMaterial;
+    private ComputeShader ssaoShader;
     
     public TinyPipeline()
     {
         frameDataDict = new();
         Shader postProcessingShader = Shader.Find("Hidden/TinyPipeline/PostProcessing");
         postProcessingMaterial = new Material(postProcessingShader);
-        
-        Shader ssaoShader = Shader.Find("Hidden/TinyPipeline/GTVBAO");
-        ssaoMaterial = new Material(ssaoShader);
+
+        ssaoShader = Resources.Load<ComputeShader>("SSAO");
     }
 
     protected override void Render(ScriptableRenderContext context, Camera[] cameras)
@@ -101,12 +100,11 @@ public class TinyPipeline : RenderPipeline
 
         {
             commandBuffer.BeginSample("SSAO");
-            commandBuffer.SetRenderTarget(frameData.ssaoTexture);
             Matrix4x4 projection = GL.GetGPUProjectionMatrix(camera.projectionMatrix, false);
             Matrix4x4 GetCameraToScreenMatrix(int screenWidth, int screenHeight)
             {
                 Matrix4x4 ndcToPixelMat = Matrix4x4.Translate(new Vector3(0.5f, 0.5f, 0)) *
-                                          Matrix4x4.Scale(new Vector3(0.5f, 0.5f, 1));
+                                          Matrix4x4.Scale(new Vector3(-0.5f, -0.5f, 1));
                 ndcToPixelMat = Matrix4x4.Scale(new Vector3(screenWidth, screenHeight, 1)) * ndcToPixelMat;
                 Matrix4x4 projectionToPixelMatrix = ndcToPixelMat * projection;
                 return projectionToPixelMatrix;
@@ -119,8 +117,9 @@ public class TinyPipeline : RenderPipeline
             commandBuffer.SetGlobalMatrix("_world_to_camera_matrix", camera.worldToCameraMatrix);
             commandBuffer.SetGlobalMatrix("_camera_to_world_matrix", camera.cameraToWorldMatrix);
             commandBuffer.SetGlobalMatrix("_camera_to_screen_matrix", GetCameraToScreenMatrix(camera.pixelWidth, camera.pixelHeight));
-
-            commandBuffer.DrawMesh(Utils.QuadMesh, Matrix4x4.identity, ssaoMaterial);
+            
+            commandBuffer.SetComputeTextureParam(ssaoShader, 0, "_output_texture", frameData.ssaoTexture);
+            commandBuffer.DispatchCompute(ssaoShader, 0, (camera.pixelWidth + 7) / 8, (camera.pixelHeight + 7) / 8, 1);
             commandBuffer.EndSample("SSAO");
         }
         

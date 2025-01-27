@@ -1,0 +1,94 @@
+// Each #kernel tells which function to compile; you can have many kernels
+#pragma use_dxc
+#pragma enable_d3d11_debug_symbols
+
+#pragma kernel CSMain
+
+#include "UnityCG.cginc"
+#include "../RandomSequence.hlsl"
+#include "../Common.hlsl"
+
+Texture2D<float> _depth_texture;
+SamplerState _inline_linear_clamp_sampler;
+float4 _camera_pixel_size_and_screen_size;
+float4x4 _view_projection_matrix;
+float4x4 _projection_matrix;
+float4x4 _world_to_camera_matrix;
+float4x4 _camera_to_world_matrix;
+float4x4 _camera_to_screen_matrix;
+
+RWTexture2D<float4> _output_texture;
+
+float get_linearized_depth(float2 texcoord)
+{
+    float depth = _depth_texture.SampleLevel(_inline_linear_clamp_sampler, texcoord, 0).x;
+    return LinearEyeDepth(depth);
+}
+
+float3 compute_view_position(float linearZ, float2 uv, float4x4 mProj, bool leftHanded = true, bool perspective = true)
+{
+    float scale = perspective ? linearZ : 1;
+    scale *= leftHanded ? 1 : -1;
+
+    float2 p11_22 = float2(mProj._11, mProj._22);
+    float2 p13_31 = float2(mProj._13, mProj._23);
+    return float3((uv * 2.0 - 1.0 - p13_31) / p11_22 * scale, linearZ);
+}
+
+float3 compute_view_position_perspectiveLH(float linearZ, float2 uv, float4x4 mProj)
+{
+    return compute_view_position(linearZ, uv, mProj, true, true);
+}
+
+float2 world_position_to_screen_uv(float3 posW)
+{
+    float4 projected = mul(_view_projection_matrix, float4(posW, 1.0f));
+    float2 uv = (projected.xy / projected.w) * 0.5f + 0.5f;
+    return uv;
+}
+
+float2 world_position_to_screen_uv(float3 posW, out float k)
+{
+    float4 projected = mul(_view_projection_matrix, float4(posW, 1.0f));
+    k = 1.0f / projected.w;
+    float2 uv = (projected.xy * k) * 0.5f + 0.5f;
+    return uv;
+}
+
+float3 screen_position_to_camera_position(float2 texcoord)
+{
+    float linearZ = get_linearized_depth(texcoord);
+    float3 posCS = -compute_view_position_perspectiveLH(linearZ, texcoord, _projection_matrix);
+    return posCS;
+}
+
+float3 screen_position_from_camera_position(float3 camera_space_position)
+{
+    float4 H0 = mul(_camera_to_screen_matrix, float4(camera_space_position, 1.0));
+    // There are a lot of divisions by w that can be turned into multiplications
+    // at some minor precision loss...and we need to interpolate these 1/w values
+    // anyway.
+    //
+    // Because the caller was required to clip to the near plane,
+    // this homogeneous division (projecting from 4D to 2D) is guaranteed
+    // to succeed.
+    float k0 = 1.0 / H0.w;
+    // Screen-space endpoints
+    float2 P0 = H0.xy * k0;
+    return float3(P0, camera_space_position.z);
+}
+
+[numthreads(8,8,1)]
+void CSMain (uint2 id : SV_DispatchThreadID)
+{
+    if (any(id.xy >= _camera_pixel_size_and_screen_size.zw))
+    {
+        return;
+    }
+    
+    float2 uv = (id.xy + 0.5) / _camera_pixel_size_and_screen_size.zw;
+    float linear_depth = get_linearized_depth(uv) / 10.0;
+    // float3 camera_space_position = screen_position_to_camera_position(input.texcoord);
+    // float3 camera_space_normal = normalize(cross(ddy(camera_space_position.xyz), ddx(camera_space_position.xyz)));
+    _output_texture[id.xy] = float4(linear_depth, linear_depth, linear_depth, 0.0);
+}
