@@ -45,21 +45,8 @@ static const float ray_marching_thickness = 0.5;
 static const uint ray_marching_sample_count = 16;
 static const float ray_marching_width = 512;
 
-[numthreads(8,8,1)]
-void CSMain (uint2 id : SV_DispatchThreadID)
+float reference_ssao(inout random_sampler_state rng, float3 camera_space_position, float3 camera_space_normal)
 {
-    if (any(id.xy >= _camera_pixel_size_and_screen_size.zw))
-    {
-        return;
-    }
-
-    random_sampler_state rng = init_random_sampler(id, 0u);
-    
-    float2 uv = (id.xy + 0.5) / _camera_pixel_size_and_screen_size.zw;
-    float3 world_space_position = _position_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0).xyz;
-    float3 world_space_normal = _normal_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0).xyz;
-    float3 camera_space_normal = normalize(mul(transpose((float3x3)_camera_to_world_matrix), world_space_normal).xyz);
-    float3 camera_space_position = mul(_world_to_camera_matrix, float4(world_space_position, 1.0)).xyz;
     float occ = 0.0;
     for (uint sample_index = 0; sample_index < ray_sample_per_pixel; sample_index++)
     {
@@ -115,5 +102,26 @@ void CSMain (uint2 id : SV_DispatchThreadID)
     }
     occ /= float(ray_sample_per_pixel);
     float ao = 1.0 - occ;
+    return ao;
+}
+
+[numthreads(8,8,1)]
+void CSMain (uint2 id : SV_DispatchThreadID)
+{
+    if (any(id.xy >= _camera_pixel_size_and_screen_size.zw))
+    {
+        return;
+    }
+
+    random_sampler_state rng = init_random_sampler(id, 0u);
+    float2 uv = (id.xy + 0.5) / _camera_pixel_size_and_screen_size.zw;
+    
+    float3 world_space_position = _position_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0).xyz;
+    float3 camera_space_position = mul(_world_to_camera_matrix, float4(world_space_position, 1.0)).xyz;
+    
+    float3 world_space_normal = _normal_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0).xyz;
+    float3 camera_space_normal = normalize(mul(transpose((float3x3)_camera_to_world_matrix), world_space_normal).xyz);
+    
+    float ao = reference_ssao(rng, camera_space_position, camera_space_normal);
     _output_texture[id.xy] = float4(ao, ao, ao, 0.0);
 }
