@@ -9,6 +9,7 @@
 #include "../Common.hlsl"
 
 Texture2D<float> _depth_texture;
+Texture2D _position_texture;
 Texture2D _normal_texture;
 
 SamplerState _inline_point_clamp_sampler;
@@ -28,62 +29,9 @@ float get_linearized_depth(float2 texcoord)
     return LinearEyeDepth(depth);
 }
 
-float3 compute_view_position(float linearZ, float2 uv, float4x4 mProj, bool leftHanded = true, bool perspective = true)
-{
-    float scale = perspective ? linearZ : 1;
-    scale *= leftHanded ? 1 : -1;
-
-    float2 p11_22 = float2(mProj._11, mProj._22);
-    float2 p13_31 = float2(mProj._13, mProj._23);
-    return float3((uv * 2.0 - 1.0 - p13_31) / p11_22 * scale, linearZ);
-}
-
-float3 compute_view_position_perspectiveLH(float linearZ, float2 uv, float4x4 mProj)
-{
-    return compute_view_position(linearZ, uv, mProj, true, true);
-}
-
-float2 world_position_to_screen_uv(float3 posW)
-{
-    float4 projected = mul(_view_projection_matrix, float4(posW, 1.0f));
-    float2 uv = (projected.xy / projected.w) * 0.5f + 0.5f;
-    return uv;
-}
-
-float2 world_position_to_screen_uv(float3 posW, out float k)
-{
-    float4 projected = mul(_view_projection_matrix, float4(posW, 1.0f));
-    k = 1.0f / projected.w;
-    float2 uv = (projected.xy * k) * 0.5f + 0.5f;
-    return uv;
-}
-
-float3 screen_position_to_camera_position(float2 texcoord)
-{
-    float linearZ = get_linearized_depth(texcoord);
-    float3 posCS = -compute_view_position_perspectiveLH(linearZ, texcoord, _projection_matrix);
-    return posCS;
-}
-
-float3 screen_position_from_camera_position(float3 camera_space_position)
-{
-    float4 H0 = mul(_camera_to_screen_matrix, float4(camera_space_position, 1.0));
-    // There are a lot of divisions by w that can be turned into multiplications
-    // at some minor precision loss...and we need to interpolate these 1/w values
-    // anyway.
-    //
-    // Because the caller was required to clip to the near plane,
-    // this homogeneous division (projecting from 4D to 2D) is guaranteed
-    // to succeed.
-    float k0 = 1.0 / H0.w;
-    // Screen-space endpoints
-    float2 P0 = H0.xy * k0;
-    return float3(P0, camera_space_position.z);
-}
-
 float4 projection_space_position_from_camera_space_position(float3 position)
 {
-    return float4(-1, -1, 1, 1) * mul(_projection_matrix, float4(position, 1.0));
+    return mul(_projection_matrix, float4(position, 1.0));
 }
 
 float4 projection_space_vector_from_camera_space_vector(float3 v)
@@ -91,9 +39,11 @@ float4 projection_space_vector_from_camera_space_vector(float3 v)
     return mul(_projection_matrix, float4(v, 0.0));
 }
 
+static const uint ao_ray_direction_count = 4;
 static const float camera_near_z = 0.1;
 static const float ray_marching_thickness = 0.5;
 static const uint ray_marching_sample_count = 16;
+static const float ray_marching_width = 256;
 
 [numthreads(8,8,1)]
 void CSMain (uint2 id : SV_DispatchThreadID)
@@ -106,10 +56,10 @@ void CSMain (uint2 id : SV_DispatchThreadID)
     random_sampler_state rng = init_random_sampler(id, 0u);
     
     float2 uv = (id.xy + 0.5) / _camera_pixel_size_and_screen_size.zw;
-    float3 world_space_normal = _normal_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0);
+    float3 world_space_position = _position_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0).xyz;
+    float3 world_space_normal = _normal_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0).xyz;
     float3 camera_space_normal = normalize(mul(transpose((float3x3)_camera_to_world_matrix), world_space_normal).xyz);
-    float3 camera_space_position = screen_position_to_camera_position(uv);
-
+    float3 camera_space_position = mul(_world_to_camera_matrix, float4(world_space_position, 1.0)).xyz;
     float occ = 0.0;
     {
         float2 xy = sample_uniform_rng_2d(rng);
@@ -135,18 +85,18 @@ void CSMain (uint2 id : SV_DispatchThreadID)
         float2  tcDelta = tcDelta0 * uvDelta0RcpLen;
         float rwDelta = rwDelta0 * uvDelta0RcpLen;
             
-        float rnd01 = sample_uniform_rng(rng);
+        float random_sample = sample_uniform_rng(rng);
         
-        const float s = pow(256.0f, 1.0/ray_marching_sample_count);
+        const float step_size = pow(ray_marching_width, 1.0/ray_marching_sample_count);
             
-        float t = pow(s, rnd01);// init t: [1, s]
+        float t = pow(step_size, random_sample);// init t: [1, s]
 
         for (float i = 0.0; i < ray_marching_sample_count; ++i)
         {
             float2  tc = tcStart + tcDelta * t;
             float rw = rwStart + rwDelta * t;
 
-            t *= s;
+            t *= step_size;
 
             float depth = 1.0 / rw;
 
@@ -155,7 +105,7 @@ void CSMain (uint2 id : SV_DispatchThreadID)
             {
                 break;
             }
-                
+            
             float sampleDepth = get_linearized_depth(tc.xy);
             if(depth > sampleDepth && depth < (sampleDepth + ray_marching_thickness))
             {
@@ -165,8 +115,5 @@ void CSMain (uint2 id : SV_DispatchThreadID)
         }
     }
     float ao = 1.0 - occ;
-    
-    // float3 camera_space_position = screen_position_to_camera_position(input.texcoord);
-    // float3 camera_space_normal = normalize(cross(ddy(camera_space_position.xyz), ddx(camera_space_position.xyz)));
     _output_texture[id.xy] = float4(ao, ao, ao, 0.0);
 }

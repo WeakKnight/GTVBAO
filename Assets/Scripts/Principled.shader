@@ -46,6 +46,7 @@ Shader "TinyPipeline/Principled"
                 float2 uv0 : TEXCOORD0;
                 float4 vertex : SV_POSITION;
                 float3 normal : NORMAL;
+                float4 posL : LOCALPOS;
             };
             
 
@@ -55,13 +56,15 @@ Shader "TinyPipeline/Principled"
                 o.vertex = UnityObjectToClipPos(v.position);
                 o.uv0 = TRANSFORM_TEX(v.uv0, _BaseColorTex);
                 o.normal = v.normal;
+                o.posL = v.position;
                 return o;
             }
 
             struct GBufferOutput
             {
                 float4 baseColor : SV_Target0;
-                float4 normalW : SV_Target1;
+                float4 posW : SV_Target1;
+                float4 normalW : SV_Target2;
             };
             
             GBufferOutput frag (v2f i)
@@ -70,6 +73,7 @@ Shader "TinyPipeline/Principled"
                 
                 GBufferOutput output;
                 output.baseColor = _BaseColor * tex2D(_BaseColorTex, i.uv0);
+                output.posW = float4(mul(unity_ObjectToWorld, i.posL).xyz, 1.0f);
                 output.normalW = float4(worldNormal.xyz, 1.0f);
                 return output;
             }

@@ -7,6 +7,7 @@ public class FrameData
 {
     public RenderTargetIdentifier cameraTexture;
     public RenderTexture linearResult;
+    public RenderTexture posW;
     public RenderTexture normalW;
     public RenderTexture ssaoTexture;
     public int width = -1;
@@ -30,6 +31,12 @@ public class FrameData
             normalW.Release();
         }
         normalW = null;
+
+        if (posW)
+        {
+            posW.Release();
+        }
+        posW = null;
         
         if (ssaoTexture)
         {
@@ -52,6 +59,9 @@ public class FrameData
         linearResult = new RenderTexture(camera.pixelWidth, camera.pixelHeight, 24, RenderTextureFormat.RGB111110Float, RenderTextureReadWrite.Linear);
         linearResult.Create();
 
+        posW = new RenderTexture(camera.pixelWidth, camera.pixelHeight, 0, RenderTextureFormat.ARGBFloat, RenderTextureReadWrite.Linear);
+        posW.Create();
+        
         normalW = new RenderTexture(camera.pixelWidth, camera.pixelHeight, 0, RenderTextureFormat.ARGBHalf, RenderTextureReadWrite.Linear);
         normalW.Create();
         
