@@ -20,6 +20,7 @@ float4x4 _projection_matrix;
 float4x4 _world_to_camera_matrix;
 float4x4 _camera_to_world_matrix;
 float4x4 _camera_to_screen_matrix;
+int frame_index;
 
 RWTexture2D<float4> _output_texture;
 
@@ -43,7 +44,7 @@ static const uint ray_sample_per_pixel = 4;
 static const float camera_near_z = 0.1;
 static const float ray_marching_thickness = 0.5;
 static const uint ray_marching_sample_count = 16;
-static const float ray_marching_width = 512;
+static const float ray_marching_width = 256;
 
 float reference_ssao(inout random_sampler_state rng, float3 camera_space_position, float3 camera_space_normal)
 {
@@ -113,7 +114,7 @@ void CSMain (uint2 id : SV_DispatchThreadID)
         return;
     }
 
-    random_sampler_state rng = init_random_sampler(id, 0u);
+    random_sampler_state rng = init_random_sampler(id, frame_index);
     float2 uv = (id.xy + 0.5) / _camera_pixel_size_and_screen_size.zw;
     
     float3 world_space_position = _position_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0).xyz;

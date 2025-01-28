@@ -121,6 +121,8 @@ public class TinyPipeline : RenderPipeline
             commandBuffer.SetGlobalMatrix("_camera_to_world_matrix", camera.cameraToWorldMatrix);
             commandBuffer.SetGlobalMatrix("_camera_to_screen_matrix", GetCameraToScreenMatrix(camera.pixelWidth, camera.pixelHeight));
             
+            commandBuffer.SetGlobalInt("frame_index", Time.renderedFrameCount);
+            
             commandBuffer.SetComputeTextureParam(ssaoShader, 0, "_output_texture", frameData.ssaoTexture);
             commandBuffer.DispatchCompute(ssaoShader, 0, (camera.pixelWidth + 7) / 8, (camera.pixelHeight + 7) / 8, 1);
             commandBuffer.EndSample("SSAO");
