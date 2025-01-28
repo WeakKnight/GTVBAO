@@ -81,6 +81,20 @@ float3 screen_position_from_camera_position(float3 camera_space_position)
     return float3(P0, camera_space_position.z);
 }
 
+float4 projection_space_position_from_camera_space_position(float3 position)
+{
+    return float4(-1, -1, 1, 1) * mul(_projection_matrix, float4(position, 1.0));
+}
+
+float4 projection_space_vector_from_camera_space_vector(float3 v)
+{
+    return mul(_projection_matrix, float4(v, 0.0));
+}
+
+static const float camera_near_z = 0.1;
+static const float ray_marching_thickness = 0.5;
+static const uint ray_marching_sample_count = 16;
+
 [numthreads(8,8,1)]
 void CSMain (uint2 id : SV_DispatchThreadID)
 {
@@ -88,11 +102,71 @@ void CSMain (uint2 id : SV_DispatchThreadID)
     {
         return;
     }
+
+    random_sampler_state rng = init_random_sampler(id, 0u);
     
     float2 uv = (id.xy + 0.5) / _camera_pixel_size_and_screen_size.zw;
-    float linear_depth = get_linearized_depth(uv) / 10.0;
     float3 world_space_normal = _normal_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0);
+    float3 camera_space_normal = normalize(mul(transpose((float3x3)_camera_to_world_matrix), world_space_normal).xyz);
+    float3 camera_space_position = screen_position_to_camera_position(uv);
+
+    float occ = 0.0;
+    {
+        float2 xy = sample_uniform_rng_2d(rng);
+        float3 rayDir = sample_sphere(xy);
+        // cosine weighted hemisphere
+        rayDir = normalize(rayDir + camera_space_normal);
+        float4 rayStart = projection_space_position_from_camera_space_position(camera_space_position);
+        float4 rayEnd = projection_space_position_from_camera_space_position(camera_space_position + rayDir * camera_near_z * 0.5);
+        
+        float rwStart = 1.0 / rayStart.w;
+        float rwEnd   = 1.0 / rayEnd.w;
+            
+        float2 tcStart = rayStart.xy * rwStart * 0.5 + 0.5;
+        float2 tcEnd   = rayEnd.xy   * rwEnd   * 0.5 + 0.5;
+            
+        float2  tcDelta0 = tcEnd - tcStart;
+        float rwDelta0 = rwEnd - rwStart;
+            
+        float2  uvDelta0 = tcDelta0 * _camera_pixel_size_and_screen_size.zw;
+        float uvDelta0RcpLen = rsqrt(dot(uvDelta0, uvDelta0));
+
+        // 1 px step size
+        float2  tcDelta = tcDelta0 * uvDelta0RcpLen;
+        float rwDelta = rwDelta0 * uvDelta0RcpLen;
+            
+        float rnd01 = sample_uniform_rng(rng);
+        
+        const float s = pow(256.0f, 1.0/ray_marching_sample_count);
+            
+        float t = pow(s, rnd01);// init t: [1, s]
+
+        for (float i = 0.0; i < ray_marching_sample_count; ++i)
+        {
+            float2  tc = tcStart + tcDelta * t;
+            float rw = rwStart + rwDelta * t;
+
+            t *= s;
+
+            float depth = 1.0 / rw;
+
+            // handle oob
+            if(tc.x < 0.0 || tc.x >= 1.0 || tc.y < 0.0 || tc.y >= 1.0)
+            {
+                break;
+            }
+                
+            float sampleDepth = get_linearized_depth(tc.xy);
+            if(depth > sampleDepth && depth < (sampleDepth + ray_marching_thickness))
+            {
+                occ += 1.0;
+                break;
+            }
+        }
+    }
+    float ao = 1.0 - occ;
+    
     // float3 camera_space_position = screen_position_to_camera_position(input.texcoord);
     // float3 camera_space_normal = normalize(cross(ddy(camera_space_position.xyz), ddx(camera_space_position.xyz)));
-    _output_texture[id.xy] = float4(world_space_normal * 0.5 + 0.5, 0.0);
+    _output_texture[id.xy] = float4(ao, ao, ao, 0.0);
 }
