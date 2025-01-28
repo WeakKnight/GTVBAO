@@ -39,11 +39,11 @@ float4 projection_space_vector_from_camera_space_vector(float3 v)
     return mul(_projection_matrix, float4(v, 0.0));
 }
 
-static const uint ao_ray_direction_count = 4;
+static const uint ray_sample_per_pixel = 4;
 static const float camera_near_z = 0.1;
 static const float ray_marching_thickness = 0.5;
 static const uint ray_marching_sample_count = 16;
-static const float ray_marching_width = 256;
+static const float ray_marching_width = 512;
 
 [numthreads(8,8,1)]
 void CSMain (uint2 id : SV_DispatchThreadID)
@@ -61,6 +61,7 @@ void CSMain (uint2 id : SV_DispatchThreadID)
     float3 camera_space_normal = normalize(mul(transpose((float3x3)_camera_to_world_matrix), world_space_normal).xyz);
     float3 camera_space_position = mul(_world_to_camera_matrix, float4(world_space_position, 1.0)).xyz;
     float occ = 0.0;
+    for (uint sample_index = 0; sample_index < ray_sample_per_pixel; sample_index++)
     {
         float2 xy = sample_uniform_rng_2d(rng);
         float3 rayDir = sample_sphere(xy);
@@ -99,13 +100,11 @@ void CSMain (uint2 id : SV_DispatchThreadID)
             t *= step_size;
 
             float depth = 1.0 / rw;
-
             // handle oob
             if(tc.x < 0.0 || tc.x >= 1.0 || tc.y < 0.0 || tc.y >= 1.0)
             {
                 break;
             }
-            
             float sampleDepth = get_linearized_depth(tc.xy);
             if(depth > sampleDepth && depth < (sampleDepth + ray_marching_thickness))
             {
@@ -114,6 +113,7 @@ void CSMain (uint2 id : SV_DispatchThreadID)
             }
         }
     }
+    occ /= float(ray_sample_per_pixel);
     float ao = 1.0 - occ;
     _output_texture[id.xy] = float4(ao, ao, ao, 0.0);
 }
