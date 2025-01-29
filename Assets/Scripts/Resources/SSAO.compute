@@ -40,70 +40,80 @@ float4 projection_space_vector_from_camera_space_vector(float3 v)
     return mul(_projection_matrix, float4(v, 0.0));
 }
 
+float4 screen_space_position_from_camera_space_position(float3 position)
+{
+    return mul(_camera_to_screen_matrix, float4(position, 1.0));
+}
+
 static const uint ray_sample_per_pixel = 4;
 static const float camera_near_z = 0.1;
 static const float ray_marching_thickness = 0.5;
-static const uint ray_marching_sample_count = 16;
-static const float ray_marching_width = 256;
+static const uint ray_marching_sample_count = 8;
+static const float ray_marching_width = 128;
+
+float ground_truth_visibility_mask_ao(inout random_sampler_state rng, float3 camera_space_position, float3 camera_space_normal)
+{
+    float occ = 0.0;
+    return 0.0;
+}
 
 float reference_ssao(inout random_sampler_state rng, float3 camera_space_position, float3 camera_space_normal)
 {
-    float occ = 0.0;
+    float occlusion = 0.0;
     for (uint sample_index = 0; sample_index < ray_sample_per_pixel; sample_index++)
     {
         float2 xy = sample_uniform_rng_2d(rng);
-        float3 rayDir = sample_sphere(xy);
+        float3 sample_direction = sample_sphere(xy);
         // cosine weighted hemisphere
-        rayDir = normalize(rayDir + camera_space_normal);
-        float4 rayStart = projection_space_position_from_camera_space_position(camera_space_position);
-        float4 rayEnd = projection_space_position_from_camera_space_position(camera_space_position + rayDir * camera_near_z * 0.5);
+        sample_direction = normalize(sample_direction + camera_space_normal);
+        float4 h0 = screen_space_position_from_camera_space_position(camera_space_position);
+        float4 h1 = screen_space_position_from_camera_space_position(camera_space_position + sample_direction * camera_near_z * 0.5);
         
-        float rwStart = 1.0 / rayStart.w;
-        float rwEnd   = 1.0 / rayEnd.w;
+        float k0 = 1.0 / h0.w;
+        float k1 = 1.0 / h1.w;
+        
+        float2 p0 = h0.xy * k0;
+        float2 p1 = h1.xy * k1;
+        
+        float2 dp = p1 - p0;
+        float dk = k1 - k0;
             
-        float2 tcStart = rayStart.xy * rwStart * 0.5 + 0.5;
-        float2 tcEnd   = rayEnd.xy   * rwEnd   * 0.5 + 0.5;
-            
-        float2  tcDelta0 = tcEnd - tcStart;
-        float rwDelta0 = rwEnd - rwStart;
-            
-        float2  uvDelta0 = tcDelta0 * _camera_pixel_size_and_screen_size.zw;
-        float uvDelta0RcpLen = rsqrt(dot(uvDelta0, uvDelta0));
+        float2 derivative_of_p_with_respect_to_uv = dp * _camera_pixel_size_and_screen_size.zw;
+        float one_over_length_of_derivative_of_p_with_respect_to_uv = rsqrt(dot(derivative_of_p_with_respect_to_uv, derivative_of_p_with_respect_to_uv));
 
         // 1 px step size
-        float2  tcDelta = tcDelta0 * uvDelta0RcpLen;
-        float rwDelta = rwDelta0 * uvDelta0RcpLen;
+        dp = dp * one_over_length_of_derivative_of_p_with_respect_to_uv;
+        dk = dk * one_over_length_of_derivative_of_p_with_respect_to_uv;
             
         float random_sample = sample_uniform_rng(rng);
         
-        const float step_size = pow(ray_marching_width, 1.0/ray_marching_sample_count);
+        const float step_size = pow(ray_marching_width, 1.0 / ray_marching_sample_count);
             
         float t = pow(step_size, random_sample);// init t: [1, s]
 
-        for (float i = 0.0; i < ray_marching_sample_count; ++i)
+        for (float i = 0.0; i < ray_marching_sample_count; i++)
         {
-            float2  tc = tcStart + tcDelta * t;
-            float rw = rwStart + rwDelta * t;
-
-            t *= step_size;
-
-            float depth = 1.0 / rw;
-            // handle oob
-            if(tc.x < 0.0 || tc.x >= 1.0 || tc.y < 0.0 || tc.y >= 1.0)
+            float2 uv = p0 + dp * t;
+            if (any(uv < 0) || any(uv >= 1))
             {
                 break;
             }
-            float sampleDepth = get_linearized_depth(tc.xy);
-            if(depth > sampleDepth && depth < (sampleDepth + ray_marching_thickness))
+            float k = k0 + dk * t;
+
+            // exponential step size
+            t *= step_size;
+
+            float estimated_depth = 1.0 / k;
+            float depth_sample = get_linearized_depth(uv);
+            if((estimated_depth > depth_sample) && (estimated_depth < (depth_sample + ray_marching_thickness)))
             {
-                occ += 1.0;
+                occlusion += 1.0;
                 break;
             }
         }
     }
-    occ /= float(ray_sample_per_pixel);
-    float ao = 1.0 - occ;
-    return ao;
+    occlusion /= float(ray_sample_per_pixel);
+    return 1.0 - occlusion;
 }
 
 [numthreads(8,8,1)]
