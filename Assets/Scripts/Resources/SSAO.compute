@@ -48,8 +48,8 @@ float4 screen_space_position_from_camera_space_position(float3 position)
 static const uint ray_sample_per_pixel = 4;
 static const float camera_near_z = 0.1;
 static const float ray_marching_thickness = 0.5;
-static const uint ray_marching_sample_count = 8;
-static const float ray_marching_width = 128;
+static const uint ray_marching_sample_count = 4;
+static const float ray_marching_width = 256;
 
 float ground_truth_visibility_mask_ao(inout random_sampler_state rng, float3 camera_space_position, float3 camera_space_normal)
 {
