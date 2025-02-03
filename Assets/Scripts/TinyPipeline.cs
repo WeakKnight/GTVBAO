@@ -101,7 +101,7 @@ public class TinyPipeline : RenderPipeline
         {
             commandBuffer.BeginSample("SSAO");
             Matrix4x4 projection = GL.GetGPUProjectionMatrix(camera.projectionMatrix, false);
-            Matrix4x4 GetCameraToScreenMatrix(int screenWidth, int screenHeight)
+            Matrix4x4 GetCameraToNormalizedNDCMatrix(int screenWidth, int screenHeight)
             {
                 Matrix4x4 ndcToPixelMat = Matrix4x4.Translate(new Vector3(0.5f, 0.5f, 0)) *
                                           Matrix4x4.Scale(new Vector3(0.5f, 0.5f, 1));
@@ -116,9 +116,11 @@ public class TinyPipeline : RenderPipeline
             commandBuffer.SetGlobalVector("_camera_pixel_size_and_screen_size", new Vector4(1.0f / camera.pixelWidth, 1.0f / camera.pixelHeight, camera.pixelWidth, camera.pixelHeight));
             commandBuffer.SetGlobalMatrix("_view_projection_matrix", viewProjection);
             commandBuffer.SetGlobalMatrix("_projection_matrix", projection);
+            commandBuffer.SetGlobalMatrix("_inverse_projection_matrix", projection.inverse);
             commandBuffer.SetGlobalMatrix("_world_to_camera_matrix", camera.worldToCameraMatrix);
             commandBuffer.SetGlobalMatrix("_camera_to_world_matrix", camera.cameraToWorldMatrix);
-            commandBuffer.SetGlobalMatrix("_camera_to_screen_matrix", GetCameraToScreenMatrix(camera.pixelWidth, camera.pixelHeight));
+            commandBuffer.SetGlobalMatrix("_camera_to_normalized_ndc_matrix", GetCameraToNormalizedNDCMatrix(camera.pixelWidth, camera.pixelHeight));
+            commandBuffer.SetGlobalVector("_camera_near_far", new Vector4(camera.nearClipPlane, camera.farClipPlane, 0.0f, 0.0f));
             
             commandBuffer.SetGlobalInt("frame_index", Time.renderedFrameCount);
             
