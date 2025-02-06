@@ -72,11 +72,11 @@ void find_horizons(inout uint occlusion_bits,
 {
     float2 ray_direction = screen_space_sample_direction * d;
     const float step_length = pow(ray_marching_width, 1.0 / ray_marching_sample_count);
-    float t = pow(step_length, XY.x);
+    float t0 = pow(step_length, XY.x);
     for (uint i = 0; i < ray_marching_sample_count; i++)
     {
+        float t = t0 * pow(step_length, i);
         float2 screen_space_sample_position = ray_start + ray_direction * t;
-        t *= step_length;
         if(screen_space_sample_position.x < 0.0 || screen_space_sample_position.x >= _camera_pixel_size_and_screen_size.z || screen_space_sample_position.y < 0.0 || screen_space_sample_position.y >= _camera_pixel_size_and_screen_size.w)
         {
             break;
