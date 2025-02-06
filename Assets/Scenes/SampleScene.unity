@@ -38,6 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -175,10 +176,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -195,10 +198,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -323,10 +345,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -343,10 +367,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -456,10 +499,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -476,10 +521,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -589,10 +653,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -609,10 +675,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -722,10 +807,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -742,10 +829,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -855,10 +961,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -875,10 +983,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -988,10 +1115,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1008,10 +1137,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -1121,10 +1269,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1141,10 +1291,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -1254,10 +1423,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1274,10 +1445,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -1344,10 +1534,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1364,10 +1556,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -1492,10 +1703,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1512,10 +1725,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -1582,10 +1814,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1602,10 +1836,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -1730,10 +1983,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1750,10 +2005,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -1846,6 +2120,7 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+  m_BakeVisibility: 1
 --- !u!4 &705507995
 Transform:
   m_ObjectHideFlags: 0
@@ -1914,10 +2189,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -1934,10 +2211,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -2062,10 +2358,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2082,10 +2380,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -2195,10 +2512,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2215,10 +2534,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -2328,10 +2666,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2348,10 +2688,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -2418,10 +2777,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2438,10 +2799,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -2566,10 +2946,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2586,10 +2968,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -2699,10 +3100,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2719,10 +3122,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -2812,8 +3234,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.3758959, y: 0.3551932, z: -0.15875195, w: -0.84103376}
-  m_LocalPosition: {x: 27.555214, y: 23.438168, z: -43.54728}
+  m_LocalRotation: {x: -0.09113667, y: 0.6306569, z: -0.07500609, w: -0.7670333}
+  m_LocalPosition: {x: 26.424967, y: 7.3966484, z: -13.710657}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2939,10 +3361,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -2959,10 +3383,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -3044,10 +3487,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3064,10 +3509,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -3192,10 +3656,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3212,10 +3678,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -3325,10 +3810,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3345,10 +3832,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -3415,10 +3921,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3435,10 +3943,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -3520,10 +4047,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3540,10 +4069,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -3668,10 +4216,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3688,10 +4238,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -3801,10 +4370,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3821,10 +4392,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -3934,10 +4524,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -3954,10 +4546,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -4067,10 +4678,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4087,10 +4700,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -4200,10 +4832,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4220,10 +4854,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -4290,10 +4943,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4310,10 +4965,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -4438,10 +5112,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4458,10 +5134,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -4571,10 +5266,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4591,10 +5288,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -4704,10 +5420,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4724,10 +5442,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -4837,10 +5574,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4857,10 +5596,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -4970,10 +5728,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -4990,10 +5750,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -5103,10 +5882,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5123,10 +5904,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -5236,10 +6036,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5256,10 +6058,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -5369,10 +6190,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5389,10 +6212,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -5502,10 +6344,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5522,10 +6366,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -5592,10 +6455,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5612,10 +6477,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -5740,10 +6624,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5760,10 +6646,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -5873,10 +6778,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5893,10 +6800,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -5963,10 +6889,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -5983,10 +6911,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -6069,10 +7016,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6089,10 +7038,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -6244,10 +7212,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6264,10 +7234,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -6377,10 +7366,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6397,10 +7388,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
@@ -6510,10 +7520,12 @@ MeshRenderer:
   m_DynamicOccludee: 1
   m_StaticShadowCaster: 0
   m_MotionVectors: 1
+  m_GIType: 0
   m_LightProbeUsage: 1
   m_ReflectionProbeUsage: 1
   m_RayTracingMode: 2
   m_RayTraceProcedural: 0
+  m_UseShadowMask: 0
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
@@ -6530,10 +7542,29 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
+  m_SeamStitching: 0
+  m_OverrideTileSize: 0
+  m_ReceiveSM: 0
+  m_SMSeamStitching: 0
+  m_SMOverrideTileSize: 0
   m_SelectedEditorRenderState: 3
+  m_GIRepresentation: 0
+  m_GIMode: 0
+  m_CPUProbeUpdateMode: 1
+  m_CPUProbeAnchorMode: 1
+  m_SMMode: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
+  m_TileWidth: 64
+  m_TileHeight: 64
+  m_ManualLightmapIndex: -1
+  m_SMTileWidth: 64
+  m_SMTileHeight: 64
+  m_SMManualLightmapIndex: -1
+  m_CPUProbeDelayTime: 0
+  m_CPUProbeAnchorBoundSize: {x: 0, y: 0, z: 0}
+  m_CPUProbeAnchorOffset: {x: 0, y: 0, z: 0}
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
