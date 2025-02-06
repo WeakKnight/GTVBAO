@@ -229,4 +229,19 @@ float slice_rel_cdf_cos(float x, float angN, float cosN, bool isPhiLargerThanAng
     return t0 / t1;
 }
 
+float3 compute_view_position(float linearZ, float2 uv, float4x4 mProj, bool leftHanded = true, bool perspective = true)
+{
+    float scale = perspective ? linearZ : 1;
+    scale *= leftHanded ? 1 : -1;
+
+    float2 p11_22 = float2(mProj._11, mProj._22);
+    float2 p13_31 = float2(mProj._13, mProj._23);
+    return float3((uv * 2.0 - 1.0 - p13_31) / p11_22 * scale, linearZ);
+}
+
+float3 compute_view_position_perspectiveLH(float linearZ, float2 uv, float4x4 mProj)
+{
+    return compute_view_position(linearZ, uv, mProj, true, true);
+}
+
 #endif
