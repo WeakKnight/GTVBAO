@@ -153,11 +153,16 @@ float inv_sin_step(float x)
 
 float inv_sin_step(float x, float s)
 {
+    if(s < 0.00001)
+    {
+        return x;
+    }
+    
     float u = asin(sin(s * M_PI_2) * (1.0 - 2.0 * x));
     return 0.5 - u * (M_1_PI / s);
 }
 
-float sample_sllice(float x, float sinNV)
+float sample_slice(float x, float sinNV)
 {
     float s = curvature_bias_step(sinNV, 0.15);
     
@@ -199,7 +204,7 @@ float2 sample_slice_direction(float3 vvsN, float rnd01)
         float x = atan(-dir0.y / dir0.x) * M_1_PI + 0.5;
         float sinNV = l;
 
-        ang = sample_sllice(x, sinNV) * M_PI - M_PI_2;
+        ang = sample_slice(x, sinNV) * M_PI - M_PI_2;
     }
     
     // ray space slice direction

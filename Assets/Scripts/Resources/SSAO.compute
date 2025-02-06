@@ -123,7 +123,7 @@ float ground_truth_visibility_mask_ao(inout random_sampler_state rng, float3 cam
     float ao = 0.0;
     for (uint direction_index = 0; direction_index < ray_sample_per_pixel; direction_index++)
     {
-        float4 random_number = sample_uniform_rng_4d(rng);
+        float3 random_number = sample_uniform_rng_3d(rng);
         
         // slice direction sampling
         float3 camera_space_sample_direction;
@@ -134,8 +134,8 @@ float ground_truth_visibility_mask_ao(inout random_sampler_state rng, float3 cam
             float3 camera_space_normal_from_V = transform_xyz_by_unit_quaternion_xy0s(camera_space_normal, quaternion_from_V);
             screen_space_sample_direction = sample_slice_direction(camera_space_normal_from_V, random_number.x);
             camera_space_sample_direction = transform_xy0_by_unit_quaternion_xy0s(screen_space_sample_direction, quaternion_from_V);
-            float3 ray_start = screen_space_position_from_camera_space_position(camera_space_position); // mul(_camera_to_screen_matrix, float4(camera_space_position, 1.0));
-            float3 ray_end = screen_space_position_from_camera_space_position(camera_space_position + camera_space_sample_direction * camera_near_z * 0.5);// mul(_camera_to_screen_matrix, float4(camera_space_position + camera_space_sample_direction * camera_near_z * 0.5, 1.0));
+            float3 ray_start = screen_space_position_from_camera_space_position(camera_space_position);
+            float3 ray_end = screen_space_position_from_camera_space_position(camera_space_position + camera_space_sample_direction * camera_near_z * 0.5);
             float3 ray_direction = ray_end - ray_start;
             ray_direction /= length(ray_direction.xy);
             screen_space_sample_direction = ray_direction.xy;
@@ -165,9 +165,9 @@ float ground_truth_visibility_mask_ao(inout random_sampler_state rng, float3 cam
         float2 ray_start = screen_space_position_from_camera_space_position(camera_space_position).xy;
         float ang_off = ang_N * M_1_PI + 0.5;
         uint occlusion_bits = 0u;
-        find_horizons(occlusion_bits, V, camera_space_position, ang_N, ang_off, cos_N, ray_start, screen_space_sample_direction, -1.0, random_number.zw);
-        random_number.z = 1.0 - random_number.z;
-        find_horizons(occlusion_bits, V, camera_space_position, ang_N, ang_off, cos_N, ray_start, screen_space_sample_direction, 1.0, random_number.zw);
+        find_horizons(occlusion_bits, V, camera_space_position, ang_N, ang_off, cos_N, ray_start, screen_space_sample_direction, -1.0, random_number.yz);
+        random_number.y = 1.0 - random_number.y;
+        find_horizons(occlusion_bits, V, camera_space_position, ang_N, ang_off, cos_N, ray_start, screen_space_sample_direction, 1.0, random_number.yz);
         
         float occ0 = float(countbits(occlusion_bits)) * (1.0/32.0);
         float slice_weight = 1.0;
