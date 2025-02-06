@@ -264,8 +264,6 @@ void CSMain (uint2 id : SV_DispatchThreadID)
     #else 
     float ao = ground_truth_visibility_mask_ao(id.xy, camera_space_position, camera_space_normal);
     #endif
-
-    // float depth_sample = get_linearized_depth(uv);
-    // float3 camera_space_position_derived = camera_space_position_from_screen_space_position(uv, depth_sample);
+    
     _output_texture[id.xy] = float4(ao, ao, ao, 0.0);
 }
