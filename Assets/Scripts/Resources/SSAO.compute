@@ -172,7 +172,7 @@ float ground_truth_visibility_mask_ao(uint2 screen_pixel_location, float3 camera
         random_number.y = 1.0 - random_number.y;
         find_horizons(occlusion_bits, V, camera_space_position, ang_N, ang_off, cos_N, ray_start, screen_space_sample_direction, 1.0, random_number.yz);
         
-        float occ0 = float(countbits(occlusion_bits)) * (1.0/32.0);
+        float occ0 = float(countbits(occlusion_bits)) * (1.0 / 32.0);
         float slice_weight = 1.0;
         ao += slice_weight - slice_weight * occ0;
     }
