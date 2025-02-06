@@ -7,14 +7,22 @@ public class TinyPipeline : RenderPipeline
     FrameData.Dict frameDataDict;
     private Material postProcessingMaterial;
     private ComputeShader ssaoShader;
-    
-    public TinyPipeline()
+    private Texture2DArray blueNoiseTexture;
+    public TinyPipeline(Texture2D[] blueNoiseTextures)
     {
         frameDataDict = new();
         Shader postProcessingShader = Shader.Find("Hidden/TinyPipeline/PostProcessing");
         postProcessingMaterial = new Material(postProcessingShader);
 
         ssaoShader = Resources.Load<ComputeShader>("SSAO");
+        
+        blueNoiseTexture = new Texture2DArray(128, 128, 64, TextureFormat.RGBA32, false, true);
+        for (int i = 0; i < 64; i++)
+        {
+            Graphics.CopyTexture(blueNoiseTextures[i], 0, blueNoiseTexture, i);
+        }
+
+        Application.targetFrameRate = 60;
     }
 
     protected override void Render(ScriptableRenderContext context, Camera[] cameras)
@@ -112,6 +120,7 @@ public class TinyPipeline : RenderPipeline
             commandBuffer.SetGlobalTexture("_depth_texture", frameData.GetDepth(), RenderTextureSubElement.Depth);
             commandBuffer.SetGlobalTexture("_position_texture", frameData.posW);
             commandBuffer.SetGlobalTexture("_normal_texture", frameData.normalW);
+            commandBuffer.SetGlobalTexture("_blue_noise_texture_array", blueNoiseTexture);
             
             commandBuffer.SetGlobalVector("_camera_pixel_size_and_screen_size", new Vector4(1.0f / camera.pixelWidth, 1.0f / camera.pixelHeight, camera.pixelWidth, camera.pixelHeight));
             commandBuffer.SetGlobalMatrix("_view_projection_matrix", viewProjection);

@@ -7,9 +7,16 @@
 #include "../RandomSequence.hlsl"
 #include "../Common.hlsl"
 
+static const uint ray_sample_per_pixel = 8;
+static const float camera_near_z = 0.1;
+static const float ray_marching_thickness = 0.5;
+static const uint ray_marching_sample_count = 8;
+static const float ray_marching_width = 128;
+
 Texture2D<float> _depth_texture;
 Texture2D _position_texture;
 Texture2D _normal_texture;
+Texture2DArray _blue_noise_texture_array;
 
 SamplerState _inline_point_clamp_sampler;
 SamplerState _inline_linear_clamp_sampler;
@@ -26,6 +33,11 @@ float4 _camera_near_far;
 int frame_index;
 
 RWTexture2D<float4> _output_texture;
+
+float4 sample_blue_noise(uint2 screen_pixel_location, uint sample_index)
+{
+    return _blue_noise_texture_array.Load(uint4(screen_pixel_location % 128, sample_index % 64, 0));
+}
 
 float get_linearized_depth(float2 texcoord)
 {
@@ -46,19 +58,12 @@ float3 screen_space_position_from_camera_space_position(float3 position)
     return float3(pixel_position, position.z);
 }
 
-// test pass
 float3 camera_space_position_from_screen_space_position(float2 uv, float depth_sample)
 {
     float3 camera_space_position_derived = compute_view_position_perspectiveLH(depth_sample, uv, _projection_matrix);
     camera_space_position_derived.z *= -1.0;
     return camera_space_position_derived;
 }
-
-static const uint ray_sample_per_pixel = 4;
-static const float camera_near_z = 0.1;
-static const float ray_marching_thickness = 0.5;
-static const uint ray_marching_sample_count = 16;
-static const float ray_marching_width = 256;
 
 void find_horizons(inout uint occlusion_bits,
     float3 V, float3 camera_space_position,
@@ -99,7 +104,7 @@ void find_horizons(inout uint occlusion_bits,
         horizon_01.y = slice_rel_cdf_cos(horizon_01.y, ang_N, cos_N, d > 0.0);
 
         // jitter sample locations + clamp01
-        horizon_01 = clamp(horizon_01 + XY.y * (1.0/32.0), 0.0, 1.0);
+        horizon_01 = clamp(horizon_01 + XY.y * (1.0 / 32.0), 0.0, 1.0);
        
         uint occlusion_bitmask;// turn arc into bit mask
         {
@@ -117,13 +122,14 @@ void find_horizons(inout uint occlusion_bits,
     }
 }
 
-float ground_truth_visibility_mask_ao(inout random_sampler_state rng, float3 camera_space_position, float3 camera_space_normal)
+float ground_truth_visibility_mask_ao(uint2 screen_pixel_location, float3 camera_space_position, float3 camera_space_normal)
 {
     float3 V = -normalize(camera_space_position);
     float ao = 0.0;
-    for (uint direction_index = 0; direction_index < ray_sample_per_pixel; direction_index++)
+    for (uint sample_index = 0; sample_index < ray_sample_per_pixel; sample_index++)
     {
-        float3 random_number = sample_uniform_rng_3d(rng);
+        uint blue_noise_sample_index = frame_index * ray_sample_per_pixel + sample_index;
+        float3 random_number = sample_blue_noise(screen_pixel_location, blue_noise_sample_index).xyz;
         
         // slice direction sampling
         float3 camera_space_sample_direction;
@@ -256,7 +262,7 @@ void CSMain (uint2 id : SV_DispatchThreadID)
     #if 0
     float ao = reference_ssao(rng, camera_space_position, camera_space_normal);
     #else 
-    float ao = ground_truth_visibility_mask_ao(rng, camera_space_position, camera_space_normal);
+    float ao = ground_truth_visibility_mask_ao(id.xy, camera_space_position, camera_space_normal);
     #endif
 
     // float depth_sample = get_linearized_depth(uv);

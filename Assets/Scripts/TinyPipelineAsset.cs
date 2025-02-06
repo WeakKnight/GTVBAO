@@ -6,6 +6,8 @@ public class TinyPipelineAsset : RenderPipelineAsset
 {
     protected override RenderPipeline CreatePipeline()
     {
-        return new TinyPipeline();
+        return new TinyPipeline(BlueNoiseTextures);
     }
+
+    public Texture2D[] BlueNoiseTextures;
 }
