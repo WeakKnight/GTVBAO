@@ -4,7 +4,6 @@
 #pragma kernel CSMain
 
 #include "UnityCG.cginc"
-#include "../RandomSequence.hlsl"
 #include "../Common.hlsl"
 
 static const uint ray_sample_per_pixel = 8;
@@ -94,7 +93,7 @@ void find_horizons(inout uint occlusion_bits,
         float2 horizon_cos = float2(dot(normalize(delta_front), V), 
                dot(normalize(delta_back), V));
         float2 horizon_ang = acos_approx_safe(horizon_cos) * d;
-         // shift relative angles from V to N + map to [0,1]
+        // shift relative angles from V to N + map to [0,1]
         float2 horizon_01 = clamp(horizon_ang * M_1_PI + ang_off, 0.0, 1.0);
         // sampling direction flips min/max angles
         horizon_01 = d >= 0.0 ? horizon_01.xy : horizon_01.yx;
@@ -106,11 +105,11 @@ void find_horizons(inout uint occlusion_bits,
         // jitter sample locations + clamp01
         horizon_01 = clamp(horizon_01 + XY.y * (1.0 / 32.0), 0.0, 1.0);
        
-        uint occlusion_bitmask;// turn arc into bit mask
+        uint occlusion_bitmask; // turn arc into bit mask
         {
             uint2 horInt = uint2(floor(horizon_01 * 32.0));
 
-            uint OxFFFFFFFFu = 0xFFFFFFFFu;// don't inline here! ANGLE bug: https://issues.angleproject.org/issues/353039526
+            uint OxFFFFFFFFu = 0xFFFFFFFFu; // don't inline here! ANGLE bug: https://issues.angleproject.org/issues/353039526
 
             uint mX = horInt.x < 32u ? OxFFFFFFFFu <<        horInt.x  : 0u;
             uint mY = horInt.y != 0u ? OxFFFFFFFFu >> (32u - horInt.y) : 0u;
@@ -136,7 +135,7 @@ float ground_truth_visibility_mask_ao(uint2 screen_pixel_location, float3 camera
         float2 screen_space_sample_direction;
         {
             float4 quaternion_to_V = quaternion_create(V);
-            float4 quaternion_from_V = quaternion_to_V * float4(float3(-1.0, -1.0, -1.0), 1.0);// conjugate
+            float4 quaternion_from_V = quaternion_to_V * float4(float3(-1.0, -1.0, -1.0), 1.0); // conjugate
             float3 camera_space_normal_from_V = transform_xyz_by_unit_quaternion_xy0s(camera_space_normal, quaternion_from_V);
             screen_space_sample_direction = sample_slice_direction(camera_space_normal_from_V, random_number.x);
             camera_space_sample_direction = transform_xy0_by_unit_quaternion_xy0s(screen_space_sample_direction, quaternion_from_V);
@@ -153,7 +152,6 @@ float ground_truth_visibility_mask_ao(uint2 screen_pixel_location, float3 camera
         {
             float3 slice_N = cross(V, camera_space_sample_direction);
             float3 proj_N = camera_space_normal - slice_N * dot(camera_space_normal, slice_N);
-            // return float3(camera_space_normal * 0.5 + 0.5);
             float proj_N_squared_length = dot(proj_N, proj_N);
             if (proj_N_squared_length == 0.0)
             {
@@ -162,7 +160,6 @@ float ground_truth_visibility_mask_ao(uint2 screen_pixel_location, float3 camera
             float proj_N_rcp_len = rsqrt(proj_N_squared_length);
             cos_N = dot(proj_N, V) * proj_N_rcp_len;
             float3 T = cross(slice_N, proj_N);
-            // return float3(slice_N * 0.5 + 0.5);
             float sgn = dot(V, T) < 0.0 ? -1.0 : 1.0;
             ang_N = sgn * acos_approx_safe(cos_N);
         }
@@ -183,13 +180,15 @@ float ground_truth_visibility_mask_ao(uint2 screen_pixel_location, float3 camera
     return ao;
 }
 
-float reference_ssao(inout random_sampler_state rng, float3 camera_space_position, float3 camera_space_normal)
+float reference_ssao(uint2 screen_pixel_location, float3 camera_space_position, float3 camera_space_normal)
 {
     float occlusion = 0.0;
     for (uint sample_index = 0; sample_index < ray_sample_per_pixel; sample_index++)
     {
-        float2 xy = sample_uniform_rng_2d(rng);
-        float3 sample_direction = sample_sphere(xy);
+        uint blue_noise_sample_index = frame_index * ray_sample_per_pixel + sample_index;
+        float3 random_number = sample_blue_noise(screen_pixel_location, blue_noise_sample_index).xyz;
+        
+        float3 sample_direction = sample_sphere(random_number.xy);
         // cosine weighted hemisphere
         sample_direction = normalize(sample_direction + camera_space_normal);
         float4 h0 = ndc_position_from_camera_space_position(camera_space_position);
@@ -211,7 +210,7 @@ float reference_ssao(inout random_sampler_state rng, float3 camera_space_positio
         dp = dp * one_over_length_of_derivative_of_p_with_respect_to_uv;
         dk = dk * one_over_length_of_derivative_of_p_with_respect_to_uv;
             
-        float random_sample = sample_uniform_rng(rng);
+        float random_sample = random_number.z;
         
         const float step_size = pow(ray_marching_width, 1.0 / ray_marching_sample_count);
             
@@ -249,8 +248,7 @@ void CSMain (uint2 id : SV_DispatchThreadID)
     {
         return;
     }
-
-    random_sampler_state rng = init_random_sampler(id, frame_index);
+    
     float2 uv = (id.xy + 0.5) / _camera_pixel_size_and_screen_size.zw;
     
     float3 world_space_position = _position_texture.SampleLevel(_inline_point_clamp_sampler, uv, 0).xyz;
@@ -260,7 +258,7 @@ void CSMain (uint2 id : SV_DispatchThreadID)
     float3 camera_space_normal = normalize(mul(transpose((float3x3)_camera_to_world_matrix), world_space_normal).xyz);
 
     #if 0
-    float ao = reference_ssao(rng, camera_space_position, camera_space_normal);
+    float ao = reference_ssao(id.xy, camera_space_position, camera_space_normal);
     #else 
     float ao = ground_truth_visibility_mask_ao(id.xy, camera_space_position, camera_space_normal);
     #endif
