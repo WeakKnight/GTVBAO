@@ -8,7 +8,7 @@
 
 static const uint ray_sample_per_pixel = 8;
 static const float camera_near_z = 0.1;
-static const float ray_marching_thickness = 0.5;
+static const float ray_marching_thickness = 1.0;
 static const uint ray_marching_sample_count = 8;
 static const float ray_marching_width = 128;
 

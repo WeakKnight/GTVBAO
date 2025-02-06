@@ -74,9 +74,16 @@ Shader "Hidden/TinyPipeline/PostProcessing"
             {
                 half3 linColor = _input_texture.SampleLevel(_inline_point_clamp_sampler, float2(input.texcoord.xy), 0.0f).xyz;
                 half4 ao = _ao_texture.SampleLevel(_inline_point_clamp_sampler, float2(input.texcoord.xy), 0.0f);
-                linColor *= ao;
+                
+                #if 1
+                linColor *= ao.x;
+                #endif
+                
+                #if 0
                 return half4(ao);
-                // return half4(tonemapping(linColor), 1.0);
+                #else
+                return half4(tonemapping(linColor), 1.0);
+                #endif
             }
             
             ENDHLSL
